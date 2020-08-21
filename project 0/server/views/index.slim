@@ -1,25 +1,40 @@
 doctype html
 html lang="en" 
   head
-    meta charset="UTF-8" /
-    meta content="width=device-width, initial-scale=1.0" name="viewport" /
+    meta charset="UTF-8" 
+    meta content="width=device-width, initial-scale=1.0" name="viewport" 
     title Dynamic/Server
-    link href="css/main.css" rel="stylesheet" /
+    link href="css/main.css" rel="stylesheet" 
   body
     h2
       | click on:
     #target
     -for student in @students
-        .card id="#{student['id']}" onclick="is_correct(#{student['id']})" #{student['name']}
+        .card id="#{student['id']}" onclick="is_correct(#{student['id']})" 
+            p #{student['name']}
+            img src="#{student['img_path']}" alt=""/
     button#targetgetter onclick="get_target()"  get new target
     button#resetbttn onclick="reset()"  reset
     button#testbttn onclick="test()"  test
-    /h1 = @db #troubleshooting
-    /h1 = @students #troubleshooting
 
+    form action="/add_student" method="post"
+                    
+                    input type="text" name="name" value="name"
+                    input type="text" name="path" value="NYI"
+                    button type="submit" upload
 
-
-
-
+    h1 troublepewpew
+    table
+        -for student in @students 
+            thead
+                th
+                    td dood
+            tbody
+                tr
+                    td = "name: #{student['name']}"
+                tr
+                    td = "id: #{student['id']}"
+                tr
+                    td = "image path: #{student['img_path']}"
 
     script src="js/main.js" 

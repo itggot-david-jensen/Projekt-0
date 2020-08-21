@@ -14,19 +14,25 @@ function console_log(input){
 function start(){
     
     let cards = document.getElementsByClassName("card")
-    
+
     let alternatives = []
     let removed_alternatives = []
     
     for (i = 0; i < cards.length; i++){
+
+        let alternative = {}
+        
+        console.log(cards[i])
         
         cards[i].classList.remove("correct")
         cards[i].classList.remove("wrong100")
         cards[i].classList.remove("wrong66")
         cards[i].classList.remove("wrong33")
         cards[i].classList.remove("answered")
-        
-        alternatives.push(i+1)
+
+        alternative['id'] = cards[i].id
+        alternative['name'] = cards[i].textContent
+        alternatives.push(alternative)
         
     }
     
@@ -59,6 +65,10 @@ function string_to_int(string){
 
 }
 
+function int_to_string(integer){
+    return integer.toString()
+}
+
 //gets theremaining valid alternatives
 function get_alternatives(){
 
@@ -82,16 +92,24 @@ function get_removed_alternatives(){
 //removes a card from valid alternatives
 function remove_alternative(card_id){
 
-    card_id = string_to_int(card_id)
-
     let alternatives = get_alternatives()
     let removed_alternatives = get_removed_alternatives()
 
-    removed_alternatives.push(card_id)
+    //removed_alternatives.push(card_id)
+
+    alternatives.forEach(function (alternative){
+        
+        if (alternative["id"] == card_id){
+            
+            removed_alternatives.push(card_id)
+            
+        }
+        
+    })
 
     alternatives = alternatives.filter(function(x){
 
-        return x !== card_id
+        return x['id'] !== card_id
     
     })
 
@@ -110,13 +128,17 @@ function get_target(){
 
     let target_index = Math.floor((Math.random()*number_of_alternatives))
 
+    console_log(alternatives)
+    
     if (alternatives[target_index] !== undefined){
 
-        target_div.innerHTML = alternatives[target_index]
+        target_div.innerHTML = alternatives[target_index]["name"]
+        sessionStorage.setItem("target", alternatives[target_index]["id"])
         
     } else {
-
+        
         target_div.innerHTML = "victory"
+        sessionStorage.setItem("target", "victory")
 
     }
     
@@ -127,7 +149,7 @@ function get_target(){
 function answer(clicked_id){
 
     let card = document.getElementById(clicked_id)
-    
+
     remove_alternative(clicked_id)
 
     let number_of_attempts = JSON.parse(sessionStorage.getItem("attempts"))
@@ -200,11 +222,18 @@ function wrong_answer(target_id){
 //checks if the correct card was clicked
 function is_correct(clicked_id){
 
-    let target_id = string_to_int(document.getElementById("target").innerHTML)
+    clicked_id = int_to_string(clicked_id)
+
+    //let target_id = document.getElementById("target").innerHTML
+    let target_id = sessionStorage.getItem("target")
+    //let target_id = string_to_int(document.getElementById("target").innerHTML)
     let target_card = document.getElementById(clicked_id)
     let removed_alternatives = get_removed_alternatives()
 
-    if (removed_alternatives.includes(string_to_int(clicked_id)) && target_card.classList.contains("answered")){
+    console_log(removed_alternatives)
+
+    if (removed_alternatives.includes(clicked_id) && target_card.classList.contains("answered")){
+    //if (removed_alternatives.includes(string_to_int(clicked_id)) && target_card.classList.contains("answered")){
 
         console.log("skipped")
 
@@ -212,12 +241,8 @@ function is_correct(clicked_id){
 
         console_log("correct")
 
-        //console_log(parseInt(clicked_id,10))
-
         correct_answer(clicked_id)
 
-
-        
     } else {
         
         console.log("wrong")
@@ -231,7 +256,11 @@ function is_correct(clicked_id){
 // test method that links to test button for easy testing
 function test(){
 
-    get_removed_alternatives()
+    let a = int_to_string(1)
+
+    console.log("test")
+
+    console_log(a)
 
 }
 

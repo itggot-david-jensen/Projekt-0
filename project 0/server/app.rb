@@ -1,26 +1,30 @@
+require_relative "modules/dbhandler.rb"
+
 class Main < Sinatra::Base
 
+    enable :sessions
+
     before do
-
-        @db ||= SQLite3::Database.new('db/db.db')
-        @db.results_as_hash = true
-        @db
-
-        puts '#====@db====#'
-        p @db
-        puts '#===/@db/===#'
 
     end
 
     get '/' do
 
-        @students = @db.execute("SELECT * FROM students")
+        # @students = @db.execute("SELECT * FROM students")
 
-        puts '#====@students====#'
-        p @students
-        puts '#===/@students/===#'
+        @students = Student.get do {:columns => "*"} end
 
         slim :index
+
+    end
+
+    post '/add_student' do
+
+        #do stuff
+
+        Student.add do {:student => [params['name'], params['path']]} end
+
+        redirect '/'
 
     end
 
