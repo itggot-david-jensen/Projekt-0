@@ -1,0 +1,25 @@
+doctype html
+html lang="en" 
+  head
+    meta charset="UTF-8" /
+    meta content="width=device-width, initial-scale=1.0" name="viewport" /
+    title Dynamic/Server
+    link href="css/main.css" rel="stylesheet" /
+  body
+    h2
+      | click on:
+    #target
+    -for student in @students
+        .card id="#{student['id']}" onclick="is_correct(#{student['id']})" #{student['name']}
+    button#targetgetter onclick="get_target()"  get new target
+    button#resetbttn onclick="reset()"  reset
+    button#testbttn onclick="test()"  test
+    /h1 = @db #troubleshooting
+    /h1 = @students #troubleshooting
+
+
+
+
+
+
+    script src="js/main.js" 

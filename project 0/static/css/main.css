@@ -1,0 +1,46 @@
+body {
+
+    background-color: whitesmoke;
+
+    margin: 0;
+
+}
+
+.card {
+
+    height: 100px;
+    width: 100px;
+
+    border: 2px;
+    border-style: solid;
+    border-color: black;
+
+    background-color: royalblue;
+
+    margin: 5px;
+
+}
+
+.correct{
+
+    background-color: seagreen;
+
+}
+
+.wrong100{
+
+    background-color: rgb(255, 0, 0);
+
+}
+
+.wrong66{
+
+    background-color: rgb(255, 75, 75);
+
+}
+
+.wrong33{
+
+    background-color: rgb(255, 150, 150);
+
+}
