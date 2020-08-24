@@ -22,7 +22,7 @@ function start(){
 
         let alternative = {}
         
-        console.log(cards[i])
+        // console.log(cards[i])
         
         cards[i].classList.remove("correct")
         cards[i].classList.remove("wrong100")
@@ -133,7 +133,15 @@ function get_target(){
     if (alternatives[target_index] !== undefined){
 
         target_div.innerHTML = alternatives[target_index]["name"]
-        sessionStorage.setItem("target", alternatives[target_index]["id"])
+        console.log(alternatives[target_index])
+        sessionStorage.setItem("target", JSON.stringify(alternatives[target_index]))
+        //sessionStorage.setItem("target", alternatives[target_index]["id"])
+        //sessionStorage.setItem("target", alternatives[target_index]["name"])
+
+
+        console.log("target")
+        let asda = JSON.parse(sessionStorage.getItem("target"))
+        console.log(asda["id"])
         
     } else {
         
@@ -220,34 +228,29 @@ function wrong_answer(target_id){
 }
 
 //checks if the correct card was clicked
-function is_correct(clicked_id){
+function is_correct(clicked_card){
 
-    clicked_id = int_to_string(clicked_id)
+    console.log(clicked_card)
 
-    //let target_id = document.getElementById("target").innerHTML
-    let target_id = sessionStorage.getItem("target")
-    //let target_id = string_to_int(document.getElementById("target").innerHTML)
-    let target_card = document.getElementById(clicked_id)
+    let target = JSON.parse(sessionStorage.getItem("target"))
+    let target_card = document.getElementById(clicked_card["id"])
     let removed_alternatives = get_removed_alternatives()
 
-    console_log(removed_alternatives)
-
-    if (removed_alternatives.includes(clicked_id) && target_card.classList.contains("answered")){
-    //if (removed_alternatives.includes(string_to_int(clicked_id)) && target_card.classList.contains("answered")){
+    if (removed_alternatives.includes(clicked_card["id"]) && target_card.classList.contains("answered")){
 
         console.log("skipped")
 
-    } else if (target_id == clicked_id){
+    } else if (target["id"] == clicked_card["id"] || target["name"] == clicked_card["name"]){
 
         console_log("correct")
 
-        correct_answer(clicked_id)
+        correct_answer(clicked_card["id"])
 
     } else {
         
         console.log("wrong")
-        
-        wrong_answer(target_id)
+
+        wrong_answer(target["id"])
         
     }
     
@@ -256,7 +259,9 @@ function is_correct(clicked_id){
 // test method that links to test button for easy testing
 function test(){
 
-    let a = int_to_string(1)
+    // let a = JSON.stringify({"a1":"a2","b1":"b2"})
+
+    let a =JSON.parse('{"a1":"a2","b1":"b2"}')
 
     console.log("test")
 

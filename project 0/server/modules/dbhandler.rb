@@ -83,6 +83,72 @@ class DBhandler
     
     end
 
+    # Public: removes rows from database where a condition is met
+    # 
+    # Examples
+    # 
+    # Class_inheriting_DBhandler.remove_row do {:nondefault_table => "bakelser", :where => "bananpaj", :condition => "god"} end
+    #   #=> all entries in table "bakelser" where "bananpaj" = "god" have been removed
+    def self.remove_row(&blk)
+    
+        connect
+
+        input = yield
+
+        if input[:nondefault_table] != nil
+            
+            @db.execute("DELETE FROM #{input[:nondefault_table]} WHERE #{input[:where]} = ?", input[:condition])
+            
+        else
+            
+            @db.execute("DELETE FROM #{@table_name} WHERE #{input[:where]} = ?", input[:condition])
+    
+        end
+
+    end
+
+    # Public: updates values in a database
+    # 
+    # Examples
+    # 
+    # Class_inheriting_DBhandler.update do {:columns => ["bananpaj", kanelbulle], :values => ["inte god", "god"], :where => "id", :condition => 1} end
+    #   #=> values in table @table_name where "id" = 1 in columns "bananpaj" and "kanelbulle" have been updated to "inte god" and "god" respectively
+    def self.update(&blk)
+
+        input = yield
+
+        connect
+
+        # puts '------'
+        # puts ''
+        # p table
+        # puts ''
+        # puts '------'
+
+        if input[:columns].length == input[:values].length
+
+            input[:columns].each_with_index do |column, i|
+
+                # puts '#----------#'
+                # puts ''
+                # p "UPDATE #{@table_name} SET #{column} = '#{input[:values][i]}' WHERE #{input[:where]} = ?"
+                # puts ''
+                # puts '#----------#'
+            
+                @db.execute("UPDATE #{@table_name} SET #{column} = '#{input[:values][i]}' WHERE #{input[:where]} = ? ", input[:condition])
+
+            end
+        
+        end
+
+    end
+
+    def self.testmethod
+
+        # FileUtils.mkdir_p "public/img/test"
+        
+    end
+
 end
 
 class Student < DBhandler
@@ -93,9 +159,51 @@ class Student < DBhandler
     def self.add(&blk)
 
         input = yield
+        
+        array = [input[:student], "wait"]
 
-        insert do {:insertion => Input.array_to_hash(input[:student], @column_names)} end
+        insert do {:insertion => Input.array_to_hash(array, @column_names)} end
+        
+        id = get do {:columns => "id", :fragment => "ORDER BY id DESC LIMIT 1"} end.first["id"]
+        
+        FileUtils.mkdir_p "public/img/#{id}"
 
+        # if input[:image] && input[:image][:filename]
+
+        #     filename = input[:image][:filename]
+
+        #     file = input[:image][:tempfile]
+
+        #     path = "./public/img/#{id}/#{filename}"
+        
+        #     File.open(path, 'wb') do |f|
+
+        #         f.write(file.read)
+                
+        #     end
+
+        # end
+
+        return id
+
+    end
+
+    def self.update_path(&blk)
+
+        input = yield
+
+        update do {:columns => ["img_path"], :values => [input[:path]], :where => "id", :condition => input[:id]} end
+
+    end
+
+    def self.remove(&blk)
+
+        input = yield
+
+        remove_row do {:where => "id", :condition => input[:id]} end
+
+        FileUtils.remove_dir("public/img/#{input[:id]}")
+        
     end
 
 end
