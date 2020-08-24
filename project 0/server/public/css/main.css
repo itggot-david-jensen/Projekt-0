@@ -9,27 +9,28 @@ body {
 #target {
 
 font-size: 3rem;
+text-align: center;
 
 }
 
 .card {
 
-    height: 100px;
-    width: 100px;
+    width: 92%;
+    float: left;
+    border-radius: 15px;
 
-    border: 2px;
-    border-style: solid;
-    border-color: black;
+    margin-left: 5%;
 
-    background-color: brown;
+    background-color: lightcoral;
+    text-align: center;
+    
 
-    margin: 5px;
 
 }
 
 .correct{
 
-    background-color: seagreen;
+    background-color: lightseagreen;
 
 }
 
@@ -48,5 +49,106 @@ font-size: 3rem;
 .wrong33{
 
     background-color: rgb(255, 150, 150);
+
+}
+
+#gridcontent{
+
+    height:70%;
+    width:100%;
+    display: grid;
+
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
+
+}
+
+#gridright, #gridleft{
+
+    float: left;
+    width: 33%;
+    height: 80%;
+
+}
+#gridcontent1{
+
+    float: left;
+    width: 34%;
+    height: 80%;
+
+}
+
+#gridcontent2{
+
+        width: 100%;
+        height: 30%;
+        text-align: center;
+
+}
+
+#content2{
+
+    width: 100%;
+    height: 100%;
+
+}
+
+#namnDisplay{
+
+    text-align: center;
+
+}
+
+#content1{
+
+    width: 100%;
+
+}
+
+#paddingtop{
+
+    height: 5vh;
+    width: 100%;
+
+}
+
+#Background{
+
+    width: 100%;
+    height: 95vh;
+
+}
+
+#targetgetter{
+
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 120px;
+    height: 30px;
+    margin-top: 30%;
+    border: 0px;
+    background-color: lightcoral;
+
+}
+
+#resetbttn{
+
+    width: 120px;
+    height: 30px;
+    margin-top: 30%;
+    border: 0px;
+    background-color: lightseagreen;
+
+}
+
+ #testbttn{
+
+    height: 30px;
+    width: 120px;
+    margin-top: 30%;
+    border: 0px;
+    background-color: lightcoral;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 
 }
