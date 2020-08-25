@@ -1,0 +1,137 @@
+body {
+
+    background-color: whitesmoke;
+
+    margin: 0;
+
+}
+
+#target {
+
+font-size: 3rem;
+text-align: center;
+
+}
+
+.card {
+
+    float: left;
+    border-top-right-radius: 15px;
+
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+
+}
+
+img{
+
+    max-width: 100%;
+
+}
+
+.correct{
+
+    background-color: lightseagreen;
+
+}
+
+.wrong100{
+
+    background-color: rgb(255, 0, 0);
+
+}
+
+.wrong66{
+
+    background-color: rgb(255, 75, 75);
+
+}
+
+.wrong33{
+
+    background-color: rgb(255, 150, 150);
+
+}
+
+#gridcontent{
+
+    height:70%;
+    width:100%;
+    display: grid;
+
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 0.5vh;
+    column-gap: 1vh;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+}
+
+#gridright, #gridleft{
+
+    width: 33%;
+    height: 80%;
+
+}
+#gridcontent1{
+
+    margin: auto;
+
+    width: 34%;
+    height: 80%;
+
+}
+
+#gridcontent2{
+
+        width: 100%;
+        height: 30%;
+        text-align: center;
+
+}
+
+#content2{
+
+    width: 100%;
+    height: 100%;
+
+}
+
+#namnDisplay{
+
+    text-align: center;
+
+}
+
+#content1{
+
+    width: 100%;
+
+}
+
+#paddingtop{
+
+    height: 5vh;
+    width: 100%;
+
+}
+
+#Background{
+
+    width: 100%;
+    height: 100%;
+    background-color: rgb(77, 33, 107);
+
+}
+
+#Xbutton{
+
+    position: absolute;
+    z-index: inherit;
+
+}
+
+#BUTTONS{
+
+    border: none;
+
+}
