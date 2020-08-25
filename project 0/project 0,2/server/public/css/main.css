@@ -1,0 +1,156 @@
+body {
+
+    background-color: whitesmoke;
+
+    margin: 0;
+
+}
+
+#target {
+
+font-size: 3rem;
+text-align: center;
+
+}
+
+.card {
+
+    float: left;
+    border-radius: 15px;
+
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+
+}
+
+img{
+
+    max-width: 100%;
+
+}
+
+.correct{
+
+    background-color: lightseagreen;
+
+}
+
+.wrong100{
+
+    background-color: rgb(255, 0, 0);
+
+}
+
+.wrong66{
+
+    background-color: rgb(255, 75, 75);
+
+}
+
+.wrong33{
+
+    background-color: rgb(255, 150, 150);
+
+}
+
+#gridcontent{
+
+    height:70%;
+    width:100%;
+    display: grid;
+
+    grid-template-rows: 33% 34% 33%;
+    row-gap: 0.5vh;
+    column-gap: 0.8vh;
+    grid-template-columns: auto auto auto auto auto;
+
+}
+
+#gridright, #gridleft{
+
+    float: left;
+    width: 33%;
+    height: 80%;
+
+}
+#gridcontent1{
+
+    float: left;
+    width: 34%;
+    height: 80%;
+
+}
+
+#gridcontent2{
+
+        width: 100%;
+        height: 30%;
+        text-align: center;
+
+}
+
+#content2{
+
+    width: 100%;
+    height: 100%;
+
+}
+
+#namnDisplay{
+
+    text-align: center;
+
+}
+
+#content1{
+
+    width: 100%;
+
+}
+
+#paddingtop{
+
+    height: 5vh;
+    width: 100%;
+
+}
+
+#Background{
+
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(77, 33, 107);
+
+}
+
+#targetgetter{
+
+    border-top-left-radius: 10px;
+    width: 120px;
+    height: 30px;
+    margin-top: 30%;
+    border: 0px;
+    background-color: lightcoral;
+
+}
+
+#resetbttn{
+
+    width: 120px;
+    height: 30px;
+    margin-top: 30%;
+    border: 0px;
+    background-color: lightseagreen;
+
+}
+
+ #testbttn{
+
+    height: 30px;
+    width: 120px;
+    margin-top: 30%;
+    border: 0px;
+    background-color: lightcoral;
+    border-top-right-radius: 10px;
+
+}
